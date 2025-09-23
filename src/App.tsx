@@ -1,11 +1,9 @@
-import Header from "./components/header";
-import Hello from "./components/hello";
+import Home from "./components/Home.tsx";
 
 function App() {
   return (
-    <div className="w-96">
-      <Header />
-      <Hello />
+    <div className="w-96 text-white p-2 bg-blue-500">
+      <Home />
     </div>
   );
 }
