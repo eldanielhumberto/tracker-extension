@@ -1,13 +1,13 @@
-package com.tracker.backend;
+package com.tracker_extension.tracker;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BackendApplication {
+public class TrackerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BackendApplication.class, args);
+		SpringApplication.run(TrackerApplication.class, args);
 	}
 
 }

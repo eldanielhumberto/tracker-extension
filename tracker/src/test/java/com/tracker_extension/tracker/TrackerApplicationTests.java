@@ -1,10 +1,10 @@
-package com.tracker.backend;
+package com.tracker_extension.tracker;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BackendApplicationTests {
+class TrackerApplicationTests {
 
 	@Test
 	void contextLoads() {
