@@ -1,7 +1,8 @@
+import { useState } from 'react';
+
 import SuperStreakList from './components/SuperStreakList';
 import ManageHabits from './components/ManageHabits';
 import Habits from './components/Habits';
-import { useState } from 'react';
 
 function App() {
 	const [isManageMode, setIsManageMode] = useState(false);
@@ -16,7 +17,7 @@ function App() {
 			<Habits />
 			<button
 				className='w-full bg-[#5A5AAA] p-2 text-white font-medium text-xl hover:bg-[#4c4c91]'
-				onClick={() => setIsManageMode(prev => !prev)}
+				onClick={() => setIsManageMode((prev) => !prev)}
 			>
 				Administrar habitos
 			</button>
