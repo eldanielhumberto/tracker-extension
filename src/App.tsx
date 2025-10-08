@@ -2,7 +2,8 @@ import { useState } from 'react';
 
 import SuperStreakList from './components/SuperStreakList';
 import ManageHabits from './components/ManageHabits';
-import Habits from './components/Habits';
+import Divider from './components/shared/Divider';
+import HabitList from './components/HabitList';
 
 function App() {
 	const [isManageMode, setIsManageMode] = useState(false);
@@ -12,9 +13,12 @@ function App() {
 			<header className='text-center text-2xl font-bold p-3 text-white bg-[#232946]'>
 				Tracker Extension
 			</header>
+
 			<SuperStreakList />
-			<hr className='border-2 border-[#232946]' />
-			<Habits />
+			<Divider />
+			<HabitList />
+
+			{/*=== MANAGE HABITS ===*/}
 			<button
 				className='w-full bg-[#5A5AAA] p-2 text-white font-medium text-xl hover:bg-[#4c4c91]'
 				onClick={() => setIsManageMode((prev) => !prev)}
