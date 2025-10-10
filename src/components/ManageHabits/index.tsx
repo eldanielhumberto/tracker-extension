@@ -49,7 +49,7 @@ function ManageHabits({ setIsManageMode }: Props) {
 
 			{/*=== HABIT LIST ===*/}
 			<div className='flex flex-col gap-3 px-4'>
-				{habits ? (
+				{habits.length > 0 ? (
 					habits.map((habit) => (
 						<HabitManagerItem
 							id={habit.id}

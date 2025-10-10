@@ -6,7 +6,7 @@ function HabitList() {
 
 	return (
 		<div className='flex flex-col justify-center p-4'>
-			{habits ? (
+			{habits.length > 0 ? (
 				<>
 					<p className='text-base font-light mb-4'>
 						Para seguir la racha necesitas completar todos tus
