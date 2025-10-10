@@ -1,7 +1,9 @@
-import { Dispatch, FormEvent, SetStateAction } from 'react';
+import { Dispatch, SetStateAction } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { MoveLeft } from 'lucide-react';
 
 import { useHabits } from '../../hooks/useHabits';
+
 import HabitManagerItem from './HabitManagerItem';
 import Divider from '../shared/Divider';
 
@@ -9,14 +11,17 @@ interface Props {
 	setIsManageMode: Dispatch<SetStateAction<boolean>>;
 }
 
+interface FormInput {
+	habitName: string;
+}
+
 function ManageHabits({ setIsManageMode }: Props) {
 	const { habits, saveHabitInStorage } = useHabits();
+	const { register, handleSubmit, reset } = useForm<FormInput>();
 
-	const saveHabit = (e: FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-		const habitName = e.currentTarget.habit.value;
-
-		saveHabitInStorage({ id: 'test', name: habitName });
+	const onSubmit: SubmitHandler<FormInput> = (data) => {
+		saveHabitInStorage({ id: 'test', name: data.habitName });
+		reset();
 	};
 
 	return (
@@ -30,12 +35,12 @@ function ManageHabits({ setIsManageMode }: Props) {
 			<Divider />
 
 			{/*=== NEW HABIT FORM ===*/}
-			<form className='flex gap-2 px-4' onSubmit={saveHabit}>
+			<form className='flex gap-2 px-4' onSubmit={handleSubmit(onSubmit)}>
 				<input
 					type='text'
-					name='habit'
 					className='border border-[#232946] rounded w-full p-1 px-4 text-lg'
 					placeholder='Mi habito...'
+					{...register("habitName")}
 				/>
 				<button className='bg-[#232946] rounded text-white px-5 font-medium text-lg'>
 					Agregar
