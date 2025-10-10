@@ -1,7 +1,10 @@
 import { Edit, Trash } from 'lucide-react';
 import { Habit } from '../../interfaces/Habit';
+import { useHabits } from '../../hooks/useHabits';
 
-function HabitManagerItem({ name }: Habit) {
+function HabitManagerItem({ id, name }: Habit) {
+	const { removeHabitFromStorage } = useHabits();
+
 	return (
 		<div className='flex items-center justify-between gap-3 border p-2 px-4 rounded'>
 			<input
@@ -12,7 +15,7 @@ function HabitManagerItem({ name }: Habit) {
 			/>
 			<div className='flex gap-3'>
 				<Edit className='text-[#232946] hover:cursor-pointer' />
-				<Trash className='text-red-500 hover:cursor-pointer' />
+				<Trash className='text-red-500 hover:cursor-pointer' onClick={() => removeHabitFromStorage(id)} />
 				{/* <Check className='text-[#232946] hover:cursor-pointer' />
 				<X className='text-red-500 hover:cursor-pointer' /> */}
 			</div>

@@ -17,8 +17,15 @@ function AppProvider({ children }: PropsWithChildren) {
 		setHabits((prev) => [...prev, habit]);
 	};
 
+	const removeHabitFromStorage = (habitId: string) => {
+		const habitsWithoutOneHabit = habits.filter((habit) => habit.id !== habitId);
+
+		chrome.storage.local.set({ habits: habitsWithoutOneHabit })
+		setHabits((prev) => prev.filter((habit) => habit.id !== habitId));
+	}
+
 	return (
-		<AppContext.Provider value={{ habits, saveHabitInStorage }}>
+		<AppContext.Provider value={{ habits, saveHabitInStorage, removeHabitFromStorage }}>
 			{children}
 		</AppContext.Provider>
 	);

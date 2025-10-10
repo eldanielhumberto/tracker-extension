@@ -17,8 +17,8 @@ interface FormInput {
 }
 
 function ManageHabits({ setIsManageMode }: Props) {
-	const { habits, saveHabitInStorage } = useHabits();
 	const { register, handleSubmit, reset } = useForm<FormInput>();
+	const { habits, saveHabitInStorage } = useHabits();
 
 	const onSubmit: SubmitHandler<FormInput> = async (data) => {
 		saveHabitInStorage({ id: nanoid(), name: data.habitName });
