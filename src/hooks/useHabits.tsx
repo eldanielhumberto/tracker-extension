@@ -1,19 +1,6 @@
-import { useEffect, useState } from 'react';
-import { Habit } from '../interfaces/Habit';
+import { useContext } from 'react';
+import { AppContext } from '../contexts/AppContext/AppContext';
 
 export function useHabits() {
-	const [habits, setHabits] = useState<Habit[]>([]);
-
-	useEffect(() => {
-		chrome.storage.local.get('habits', (result) => {
-			setHabits(result.habits || []);
-		});
-	}, []);
-
-	const saveHabitInStorage = (newHabit: Habit) => {
-		chrome.storage.local.set({ habits: [...habits, newHabit] });
-		setHabits((prev) => [...prev, newHabit]);
-	};
-
-	return { habits, saveHabitInStorage };
+	return useContext(AppContext);
 }
