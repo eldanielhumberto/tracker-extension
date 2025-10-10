@@ -1,6 +1,7 @@
-import { Dispatch, SetStateAction } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { Dispatch, SetStateAction } from 'react';
 import { MoveLeft } from 'lucide-react';
+import { nanoid } from 'nanoid';
 
 import { useHabits } from '../../hooks/useHabits';
 
@@ -19,8 +20,8 @@ function ManageHabits({ setIsManageMode }: Props) {
 	const { habits, saveHabitInStorage } = useHabits();
 	const { register, handleSubmit, reset } = useForm<FormInput>();
 
-	const onSubmit: SubmitHandler<FormInput> = (data) => {
-		saveHabitInStorage({ id: 'test', name: data.habitName });
+	const onSubmit: SubmitHandler<FormInput> = async (data) => {
+		saveHabitInStorage({ id: nanoid(), name: data.habitName });
 		reset();
 	};
 
@@ -52,9 +53,9 @@ function ManageHabits({ setIsManageMode }: Props) {
 				{habits.length > 0 ? (
 					habits.map((habit) => (
 						<HabitManagerItem
+							key={habit.id}
 							id={habit.id}
 							name={habit.name}
-							key={habit.name} // TODO: This must change.
 						/>
 					))
 				) : (

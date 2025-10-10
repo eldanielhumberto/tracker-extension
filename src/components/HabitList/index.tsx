@@ -15,9 +15,9 @@ function HabitList() {
 					<div className='flex flex-col gap-3'>
 						{habits.map((habit) => (
 							<HabitTrackerItem
+								key={habit.id}
 								id={habit.id}
 								name={habit.name}
-								key={habit.name} // TODO: This must change.
 							/>
 						))}
 					</div>
