@@ -13,8 +13,12 @@ function HabitList() {
 						habitos
 					</p>
 					<div className='flex flex-col gap-3'>
-						{habits.map(() => (
-							<HabitTrackerItem />
+						{habits.map((habit) => (
+							<HabitTrackerItem
+								id={habit.id}
+								name={habit.name}
+								key={habit.name} // TODO: This must change.
+							/>
 						))}
 					</div>
 				</>

@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, FormEvent, SetStateAction } from 'react';
 import { MoveLeft } from 'lucide-react';
 
 import { useHabits } from '../../hooks/useHabits';
@@ -10,7 +10,14 @@ interface Props {
 }
 
 function ManageHabits({ setIsManageMode }: Props) {
-	const { habits } = useHabits();
+	const { habits, saveHabitInStorage } = useHabits();
+
+	const saveHabit = (e: FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		const habitName = e.currentTarget.habit.value;
+
+		saveHabitInStorage({ id: 'test', name: habitName });
+	};
 
 	return (
 		<div className='absolute size-full z-10 bg-white flex gap-5 flex-col'>
@@ -23,9 +30,10 @@ function ManageHabits({ setIsManageMode }: Props) {
 			<Divider />
 
 			{/*=== NEW HABIT FORM ===*/}
-			<form className='flex gap-2 px-4'>
+			<form className='flex gap-2 px-4' onSubmit={saveHabit}>
 				<input
 					type='text'
+					name='habit'
 					className='border border-[#232946] rounded w-full p-1 px-4 text-lg'
 					placeholder='Mi habito...'
 				/>
@@ -37,7 +45,13 @@ function ManageHabits({ setIsManageMode }: Props) {
 			{/*=== HABIT LIST ===*/}
 			<div className='flex flex-col gap-3 px-4'>
 				{habits ? (
-					habits.map(() => <HabitManagerItem />)
+					habits.map((habit) => (
+						<HabitManagerItem
+							id={habit.id}
+							name={habit.name}
+							key={habit.name} // TODO: This must change.
+						/>
+					))
 				) : (
 					<p className='text-center text-base font-light'>
 						No has agregado ningun habito
