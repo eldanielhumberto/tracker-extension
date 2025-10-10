@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 import { MoveLeft } from 'lucide-react';
 
+import { useHabits } from '../../hooks/useHabits';
 import HabitManagerItem from './HabitManagerItem';
 import Divider from '../shared/Divider';
 
@@ -9,6 +10,8 @@ interface Props {
 }
 
 function ManageHabits({ setIsManageMode }: Props) {
+	const { habits } = useHabits();
+
 	return (
 		<div className='absolute size-full z-10 bg-white flex gap-5 flex-col'>
 			<button
@@ -33,9 +36,13 @@ function ManageHabits({ setIsManageMode }: Props) {
 
 			{/*=== HABIT LIST ===*/}
 			<div className='flex flex-col gap-3 px-4'>
-				<HabitManagerItem />
-				<HabitManagerItem />
-				<HabitManagerItem />
+				{habits ? (
+					habits.map(() => <HabitManagerItem />)
+				) : (
+					<p className='text-center text-base font-light'>
+						No has agregado ningun habito
+					</p>
+				)}
 			</div>
 		</div>
 	);
