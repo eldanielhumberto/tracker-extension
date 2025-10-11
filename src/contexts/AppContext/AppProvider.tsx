@@ -17,6 +17,11 @@ function AppProvider({ children }: PropsWithChildren) {
 		setHabits((prev) => [...prev, habit]);
 	};
 
+	const updateHabitInStorage = (habitId: string, newHabitName: string) => {
+		setHabits(prev => prev.map(habit => habit.id === habitId ? { ...habit, name: newHabitName } : habit));
+		chrome.storage.local.set({ habits });
+	}
+
 	const removeHabitFromStorage = (habitId: string) => {
 		const habitsWithoutOneHabit = habits.filter((habit) => habit.id !== habitId);
 
@@ -25,7 +30,7 @@ function AppProvider({ children }: PropsWithChildren) {
 	}
 
 	return (
-		<AppContext.Provider value={{ habits, saveHabitInStorage, removeHabitFromStorage }}>
+		<AppContext.Provider value={{ habits, saveHabitInStorage, removeHabitFromStorage, updateHabitInStorage }}>
 			{children}
 		</AppContext.Provider>
 	);
