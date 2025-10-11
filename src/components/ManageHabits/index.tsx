@@ -21,7 +21,7 @@ function ManageHabits({ setIsManageMode }: Props) {
 	const { habits, saveHabitInStorage } = useHabits();
 
 	const onSubmit: SubmitHandler<FormInput> = async (data) => {
-		saveHabitInStorage({ id: nanoid(), name: data.habitName });
+		saveHabitInStorage({ id: nanoid(), name: data.habitName, completedAt: null });
 		reset();
 	};
 
@@ -55,6 +55,7 @@ function ManageHabits({ setIsManageMode }: Props) {
 						<HabitManagerItem
 							key={habit.id}
 							id={habit.id}
+							completedAt={habit.completedAt}
 							name={habit.name}
 						/>
 					))

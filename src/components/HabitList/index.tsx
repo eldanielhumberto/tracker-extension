@@ -17,6 +17,7 @@ function HabitList() {
 							<HabitTrackerItem
 								key={habit.id}
 								id={habit.id}
+								completedAt={habit.completedAt}
 								name={habit.name}
 							/>
 						))}
