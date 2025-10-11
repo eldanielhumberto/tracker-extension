@@ -54,9 +54,7 @@ function ManageHabits({ setIsManageMode }: Props) {
 					habits.map((habit) => (
 						<HabitManagerItem
 							key={habit.id}
-							id={habit.id}
-							completedAt={habit.completedAt}
-							name={habit.name}
+							habit={habit}
 						/>
 					))
 				) : (

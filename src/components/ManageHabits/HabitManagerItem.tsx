@@ -4,25 +4,25 @@ import { useRef, useState } from 'react';
 import { useHabits } from '../../hooks/useHabits';
 import { Habit } from '../../interfaces/Habit';
 
-function HabitManagerItem({ id, name }: Habit) {
+function HabitManagerItem({ habit }: { habit: Habit }) {
 	const { removeHabitFromStorage, updateHabitInStorage } = useHabits();
 
-	const [habitValue, setHabitValue] = useState(name);
+	const [habitValue, setHabitValue] = useState(habit.name);
 	const [isEditMode, setIsEditMode] = useState(false);
 	const habitInput = useRef<HTMLInputElement>(null);
 
 	const saveHabit = () => {
 		if (habitValue === '') return; // TODO: Show an error
 
-		updateHabitInStorage(id, habitValue);
+		updateHabitInStorage(habit.id, habitValue);
 		setIsEditMode((prev) => !prev);
 	}
 
 	const cancelEdit = () => {
 		if (!habitInput.current) return;
 
-		habitInput.current.value = name;
-		setHabitValue(name);
+		habitInput.current.value = habit.name;
+		setHabitValue(habit.name);
 		setIsEditMode((prev) => !prev);
 	}
 
@@ -47,7 +47,7 @@ function HabitManagerItem({ id, name }: Habit) {
 					<>
 
 						<Edit className='text-[#232946] hover:cursor-pointer' onClick={() => setIsEditMode((prev) => !prev)} />
-						<Trash className='text-red-500 hover:cursor-pointer' onClick={() => removeHabitFromStorage(id)} />
+						<Trash className='text-red-500 hover:cursor-pointer' onClick={() => removeHabitFromStorage(habit.id)} />
 					</>
 				)}
 

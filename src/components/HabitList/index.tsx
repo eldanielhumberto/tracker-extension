@@ -16,9 +16,7 @@ function HabitList() {
 						{habits.map((habit) => (
 							<HabitTrackerItem
 								key={habit.id}
-								id={habit.id}
-								completedAt={habit.completedAt}
-								name={habit.name}
+								habit={habit}
 							/>
 						))}
 					</div>
