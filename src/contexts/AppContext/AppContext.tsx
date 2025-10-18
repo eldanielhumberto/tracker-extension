@@ -11,10 +11,10 @@ export interface AppContextData {
 
 export const defaultValues: AppContextData = {
 	habits: [],
-	saveHabitInStorage: () => { },
-	updateHabitInStorage() { },
-	removeHabitFromStorage() { },
-	completeHabitInStorage() { }
+	saveHabitInStorage: () => {},
+	updateHabitInStorage() {},
+	removeHabitFromStorage() {},
+	completeHabitInStorage() {},
 };
 
 export const AppContext = createContext(defaultValues);

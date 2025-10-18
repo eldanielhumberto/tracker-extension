@@ -21,7 +21,11 @@ function ManageHabits({ setIsManageMode }: Props) {
 	const { habits, saveHabitInStorage } = useHabits();
 
 	const onSubmit: SubmitHandler<FormInput> = async (data) => {
-		saveHabitInStorage({ id: nanoid(), name: data.habitName, isCompleted: false });
+		saveHabitInStorage({
+			id: nanoid(),
+			name: data.habitName,
+			isCompleted: false,
+		});
 		reset();
 	};
 
@@ -41,7 +45,7 @@ function ManageHabits({ setIsManageMode }: Props) {
 					type='text'
 					className='border border-[#232946] rounded w-full p-1 px-4 text-lg'
 					placeholder='Mi habito...'
-					{...register("habitName")}
+					{...register('habitName')}
 				/>
 				<button className='bg-[#232946] rounded text-white px-5 font-medium text-lg'>
 					Agregar
@@ -52,10 +56,7 @@ function ManageHabits({ setIsManageMode }: Props) {
 			<div className='flex flex-col gap-3 px-4'>
 				{habits.length > 0 ? (
 					habits.map((habit) => (
-						<HabitManagerItem
-							key={habit.id}
-							habit={habit}
-						/>
+						<HabitManagerItem key={habit.id} habit={habit} />
 					))
 				) : (
 					<p className='text-center text-base font-light'>

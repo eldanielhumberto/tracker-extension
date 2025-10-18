@@ -16,7 +16,7 @@ function HabitManagerItem({ habit }: { habit: Habit }) {
 
 		updateHabitInStorage(habit.id, habitValue);
 		setIsEditMode((prev) => !prev);
-	}
+	};
 
 	const cancelEdit = () => {
 		if (!habitInput.current) return;
@@ -24,7 +24,7 @@ function HabitManagerItem({ habit }: { habit: Habit }) {
 		habitInput.current.value = habit.name;
 		setHabitValue(habit.name);
 		setIsEditMode((prev) => !prev);
-	}
+	};
 
 	// TODO: This should be a form for the “ENTER” key to work.
 	return (
@@ -40,17 +40,27 @@ function HabitManagerItem({ habit }: { habit: Habit }) {
 			<div className='flex gap-3'>
 				{isEditMode ? (
 					<>
-						<Check className='text-[#232946] hover:cursor-pointer' onClick={saveHabit} />
-						<X className='text-red-500 hover:cursor-pointer' onClick={cancelEdit} />
+						<Check
+							className='text-[#232946] hover:cursor-pointer'
+							onClick={saveHabit}
+						/>
+						<X
+							className='text-red-500 hover:cursor-pointer'
+							onClick={cancelEdit}
+						/>
 					</>
 				) : (
 					<>
-
-						<Edit className='text-[#232946] hover:cursor-pointer' onClick={() => setIsEditMode((prev) => !prev)} />
-						<Trash className='text-red-500 hover:cursor-pointer' onClick={() => removeHabitFromStorage(habit.id)} />
+						<Edit
+							className='text-[#232946] hover:cursor-pointer'
+							onClick={() => setIsEditMode((prev) => !prev)}
+						/>
+						<Trash
+							className='text-red-500 hover:cursor-pointer'
+							onClick={() => removeHabitFromStorage(habit.id)}
+						/>
 					</>
 				)}
-
 			</div>
 		</div>
 	);
