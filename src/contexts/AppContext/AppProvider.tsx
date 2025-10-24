@@ -20,30 +20,34 @@ function AppProvider({ children }: PropsWithChildren) {
 	}, []);
 
 	const saveHabitInStorage = (habit: IHabit) => {
-		chrome.storage.local.set({ habits: [...habits, habit] });
-		setHabits((prev) => [...prev, habit]);
+		setHabits((prev) => {
+			const newHabits = [...prev, habit];
+
+			chrome.storage.local.set({ habits: newHabits });
+			return newHabits;
+		});
 	};
 
 	const updateHabitInStorage = (habitId: string, newHabitName: string) => {
-		setHabits((prev) =>
-			prev.map((h) =>
+		setHabits((prev) => {
+			const updatedHabits = prev.map((h) =>
 				h.id === habitId ? { ...h, name: newHabitName } : h
-			)
-		);
-		chrome.storage.local.set({
-			habits: habits.map((h) =>
-				h.id === habitId ? { ...h, name: newHabitName } : h
-			),
+			);
+
+			chrome.storage.local.set({ habits: updatedHabits });
+			return updatedHabits;
 		});
 	};
 
 	const removeHabitFromStorage = (habitId: string) => {
-		const habitsWithoutOneHabit = habits.filter(
-			(habit) => habit.id !== habitId
-		);
+		setHabits((prev) => {
+			const habitsWithoutOneHabit = prev.filter(
+				(habit) => habit.id !== habitId
+			);
 
-		chrome.storage.local.set({ habits: habitsWithoutOneHabit });
-		setHabits((prev) => prev.filter((habit) => habit.id !== habitId));
+			chrome.storage.local.set({ habits: habitsWithoutOneHabit });
+			return habitsWithoutOneHabit;
+		});
 	};
 
 	const completeHabitInStorage = (habitId: string) => {
