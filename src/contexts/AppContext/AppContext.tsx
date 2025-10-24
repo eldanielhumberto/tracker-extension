@@ -3,7 +3,7 @@ import { IHabit } from '../../interfaces/IHabit';
 
 export interface AppContextData {
 	habits: IHabit[];
-	superStreaks: Date[];
+	superStreaks: string[];
 	saveHabitInStorage: (habit: IHabit) => void;
 	updateHabitInStorage: (habitId: string, newHabitName: string) => void;
 	removeHabitFromStorage: (habitId: string) => void;

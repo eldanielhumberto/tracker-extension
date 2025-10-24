@@ -1,11 +1,12 @@
 import { PropsWithChildren, useEffect, useState } from 'react';
 
 import { AppContext, defaultValues } from './AppContext';
+import { formatDate } from '../../utils/formatDate';
 import { IHabit } from '../../interfaces/IHabit';
 
 function AppProvider({ children }: PropsWithChildren) {
 	const [habits, setHabits] = useState<IHabit[]>(defaultValues.habits);
-	const [superStreaks, setsuperStreaks] = useState<Date[]>(
+	const [superStreaks, setSuperStreaks] = useState<string[]>(
 		defaultValues.superStreaks
 	);
 
@@ -15,7 +16,28 @@ function AppProvider({ children }: PropsWithChildren) {
 		});
 
 		chrome.storage.local.get('superStreaks', (result) => {
-			setsuperStreaks(result.superStreaks || []);
+			setSuperStreaks(result.superStreaks || []);
+		});
+
+		chrome.storage.local.get('lastResetDate', (result) => {
+			const lastResetDate = result.lastResetDate;
+			const today = formatDate(new Date());
+
+			if (lastResetDate !== today) {
+				setHabits((prev) => {
+					const resetHabits = prev.map((i) => ({
+						...i,
+						isCompleted: false,
+					}));
+
+					chrome.storage.local.set({
+						habits: resetHabits,
+						lastResetDate: today,
+					});
+
+					return resetHabits;
+				});
+			}
 		});
 	}, []);
 
@@ -52,13 +74,30 @@ function AppProvider({ children }: PropsWithChildren) {
 
 	const completeHabitInStorage = (habitId: string) => {
 		setHabits((prev) => {
+			const today = formatDate(new Date());
 			const updatedHabits = prev.map((h) =>
 				h.id === habitId ? { ...h, isCompleted: !h.isCompleted } : h
 			);
 
 			// Check if all tasks have been completed
 			if (updatedHabits.every((h) => h.isCompleted)) {
-				console.log('All completed');
+				setSuperStreaks((prev) => {
+					const newSuperStreaks = [...prev, today];
+					chrome.storage.local.set({ superStreaks: newSuperStreaks });
+
+					return newSuperStreaks;
+				});
+			} else {
+				setSuperStreaks((prev) => {
+					const superStreaksWithoutToday = prev.filter(
+						(i) => i !== today
+					);
+					chrome.storage.local.set({
+						superStreaks: superStreaksWithoutToday,
+					});
+
+					return superStreaksWithoutToday;
+				});
 			}
 
 			// Save in storage
