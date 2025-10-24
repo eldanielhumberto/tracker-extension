@@ -1,8 +1,8 @@
 import { Check } from 'lucide-react';
-import { Habit } from '../../interfaces/Habit';
+import { IHabit } from '../../interfaces/IHabit';
 import { useHabits } from '../../hooks/useHabits';
 
-function HabitTrackerItem({ habit }: { habit: Habit }) {
+function HabitTrackerItem({ habit }: { habit: IHabit }) {
 	const { completeHabitInStorage } = useHabits();
 
 	return (

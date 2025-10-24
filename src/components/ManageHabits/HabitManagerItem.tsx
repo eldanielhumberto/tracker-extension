@@ -2,9 +2,9 @@ import { Check, Edit, Trash, X } from 'lucide-react';
 import { useRef, useState } from 'react';
 
 import { useHabits } from '../../hooks/useHabits';
-import { Habit } from '../../interfaces/Habit';
+import { IHabit } from '../../interfaces/IHabit';
 
-function HabitManagerItem({ habit }: { habit: Habit }) {
+function HabitManagerItem({ habit }: { habit: IHabit }) {
 	const { removeHabitFromStorage, updateHabitInStorage } = useHabits();
 
 	const [habitValue, setHabitValue] = useState(habit.name);

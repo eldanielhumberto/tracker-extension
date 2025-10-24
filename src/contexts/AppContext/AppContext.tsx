@@ -1,9 +1,10 @@
 import { createContext } from 'react';
-import { Habit } from '../../interfaces/Habit';
+import { IHabit } from '../../interfaces/IHabit';
 
 export interface AppContextData {
-	habits: Habit[];
-	saveHabitInStorage: (habit: Habit) => void;
+	habits: IHabit[];
+	superStreaks: Date[];
+	saveHabitInStorage: (habit: IHabit) => void;
 	updateHabitInStorage: (habitId: string, newHabitName: string) => void;
 	removeHabitFromStorage: (habitId: string) => void;
 	completeHabitInStorage: (habitId: string) => void;
@@ -11,6 +12,7 @@ export interface AppContextData {
 
 export const defaultValues: AppContextData = {
 	habits: [],
+	superStreaks: [],
 	saveHabitInStorage: () => {},
 	updateHabitInStorage() {},
 	removeHabitFromStorage() {},
