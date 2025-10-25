@@ -15,7 +15,7 @@ function SuperStreakList() {
 					<div
 						className={
 							isStreak(d.date)
-								? 'w-8 h-8 border-4 border-[#232946] rounded-full bg-red-500'
+								? 'w-8 h-8 border-4 border-[#232946] rounded-full bg-[#232946]'
 								: 'w-8 h-8 border-4 border-[#232946] rounded-full'
 						}
 					></div>
