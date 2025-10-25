@@ -1,6 +1,7 @@
 import { getCurrentWeek } from '../utils/getCurrentWeek';
 import { formatDate } from '../utils/formatDate';
 import { useHabits } from '../hooks/useHabits';
+import { Flame } from 'lucide-react';
 
 function SuperStreakList() {
 	const { superStreaks } = useHabits();
@@ -12,13 +13,11 @@ function SuperStreakList() {
 			{getCurrentWeek().map((d) => (
 				<div className='flex flex-col items-center'>
 					<h1 className='text-2xl font-bold'>{d.dayName}</h1>
-					<div
-						className={
-							isStreak(d.date)
-								? 'w-8 h-8 border-4 border-[#232946] rounded-full bg-[#232946]'
-								: 'w-8 h-8 border-4 border-[#232946] rounded-full'
-						}
-					></div>
+					<div className='flex items-center justify-center w-9 h-9 border-4 border-[#232946] rounded-full '>
+						{isStreak(d.date) ? (
+							<Flame className='text-red-400' />
+						) : null}
+					</div>
 				</div>
 			))}
 		</div>
