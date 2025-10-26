@@ -8,7 +8,7 @@ function HabitList() {
 		<div className='flex flex-col justify-center p-4'>
 			{habits.length > 0 ? (
 				<>
-					<p className='text-base font-light mb-4'>
+					<p className='text-base text-center font-light mb-4'>
 						Para seguir la racha necesitas completar todos tus
 						habitos
 					</p>
