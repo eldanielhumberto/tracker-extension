@@ -28,7 +28,7 @@ function HabitManagerItem({ habit }: { habit: IHabit }) {
 
 	// TODO: This should be a form for the “ENTER” key to work.
 	return (
-		<div className='flex items-center justify-between gap-3 border p-2 px-4 rounded'>
+		<div className='flex items-center justify-between gap-3 border p-2 px-4 rounded border-[#7f8394]'>
 			<input
 				type='text'
 				defaultValue={habitValue}

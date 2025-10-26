@@ -30,7 +30,7 @@ function ManageHabits({ setIsManageMode }: Props) {
 	};
 
 	return (
-		<div className='absolute size-full z-10 bg-white flex gap-5 flex-col'>
+		<div className='absolute size-full z-10 bg-[#fff5ea] flex gap-5 flex-col'>
 			<button
 				onClick={() => setIsManageMode(false)}
 				className='flex items-center gap-2 font-medium text-2xl mx-4 mt-5'
